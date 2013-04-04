@@ -41,9 +41,10 @@ module.exports = function() {
   return new Atlas(arguments[0], arguments[1], arguments[2], arguments[3]);
 };
 module.exports.Atlas = Atlas;
+module.exports.Rect = Rect;
 
-// append image/rect to the atlas
-Atlas.prototype.append = function(rect) {
+// pack image/rect to the atlas
+Atlas.prototype.pack = function(rect) {
   // if rect is an image
   if (rect.nodeName && rect.nodeName === 'IMG') {
     this.img = rect;
@@ -54,7 +55,7 @@ Atlas.prototype.append = function(rect) {
     rect = new Rect(rect.x || 0, rect.y || 0, rect.w || rect.width, rect.h || rect.height);
   }
   if (this.left !== null) {
-    return this._ontoCanvas(this.left.append(rect) || this.right.append(rect));
+    return this._ontoCanvas(this.left.pack(rect) || this.right.pack(rect));
   }
   // if atlas filled or wont fit
   if (this.filled || !rect.fitsIn(this.rect)) {
@@ -72,7 +73,7 @@ Atlas.prototype.append = function(rect) {
     this.left = new Atlas(this.rect.x, this.rect.y, this.rect.w, rect.h);
     this.right = new Atlas(this.rect.x, this.rect.y + rect.h, this.rect.w, this.rect.h - rect.h);
   }
-  return this._ontoCanvas(this.left.append(rect));
+  return this._ontoCanvas(this.left.pack(rect));
 };
 
 // if has an image and canvas, draw to the canvas as we go

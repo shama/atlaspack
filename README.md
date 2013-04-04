@@ -20,7 +20,7 @@ for (var i = 0; i < 100; i++) {
   var img = new Image();
   img.src = 'images/' + i + '.png';
   img.onload = function() {
-    atlas.append(img);
+    atlas.pack(img);
   };
 }
 ```
@@ -37,7 +37,7 @@ var atlas = require('atlaspack')(512, 512);
   var width  = Math.random() * 32;
   var height = Math.random() * 32;
 
-  var node = atlas.append({width: width, height: height});
+  var node = atlas.pack({width: width, height: height});
 
   var div = document.createElement('div');
   div.style.width  = width + 'px';

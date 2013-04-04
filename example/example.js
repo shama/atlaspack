@@ -19,7 +19,7 @@ var texturePath = 'node_modules/painterly-textures/textures/';
   var img = new Image();
   img.src = texturePath + name + '.png';
   img.onload = function() {
-    atlas.append(img);
+    atlas.pack(img);
   };
 });
 
@@ -40,7 +40,7 @@ canvas.ondrop = function (e) {
       var img = new Image();
       img.src = event.target.result;
       img.onload = function() {
-        atlas.append(img);
+        atlas.pack(img);
       };
     };
     reader.readAsDataURL(file);
