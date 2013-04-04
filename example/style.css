@@ -1,0 +1,51 @@
+body {
+  background-color: #ddd;
+  font-family: Verdana, sans-serif;
+  font-size: 70%;
+  color: #fff;
+  text-align: center;
+}
+
+.help {
+  background-color: #900;
+  position: fixed;
+  bottom: 10px;
+  left: 0px;
+  width: 100%;
+  padding: 15px 0;
+  opacity: 0.9;
+}
+.help ul {
+  margin: 0;
+  padding: 0 10px;
+  list-style: none;
+}
+.help li {
+  float: right;
+  width: 10%;
+}
+.help li:first-child {
+  float: left;
+  width: 50%;
+}
+.help li a {
+  background-color: #a00;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 8px;
+  color: #fff;
+  text-decoration: none;
+}
+.help li a:hover {
+  background-color: #d00;
+}
+
+canvas {
+  border: 1px solid #666;
+  /* From http://subtlepatterns.com/ps-neutral/ */
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEX4+Pj09PQf/c7fAAAAGUlEQVR4XnXIMQ0AAACDMPyb3gxA0qswVX1+vw/xW46qyAAAAABJRU5ErkJggg==);
+}
+canvas.active {
+  border: 1px solid #ffcc00;
+}

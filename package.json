@@ -1,0 +1,39 @@
+{
+  "name": "atlaspack",
+  "description": "Pack images into a texture atlas.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/shama/atlaspack",
+  "author": {
+    "name": "Kyle Robinson Young",
+    "email": "kyle@dontkry.com",
+    "url": "http://dontkry.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shama/atlaspack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shama/atlaspack/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/shama/atlaspack/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/browservefy example/example.js 8080 -- -d"
+  },
+  "devDependencies": {
+    "browservefy": "0.0.10",
+    "painterly-textures": "0.0.3"
+  },
+  "keywords": [
+    "voxel",
+    "texture",
+    "atlas"
+  ]
+}
