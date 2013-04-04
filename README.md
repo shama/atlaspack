@@ -40,6 +40,7 @@ var atlas = require('atlaspack')(512, 512);
   var node = atlas.pack({width: width, height: height});
 
   var div = document.createElement('div');
+  div.style.position = 'absolute';
   div.style.width  = width + 'px';
   div.style.height = height + 'px';
   div.style.left   = node.rect.x + 'px';
