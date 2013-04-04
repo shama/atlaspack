@@ -25,7 +25,8 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "start": "./node_modules/.bin/browservefy example/example.js 8080 -- -d"
+    "start": "./node_modules/.bin/browservefy example/example.js 8080 -- -d",
+    "gh-pages": "browserify example/example.js -o example/example.js"
   },
   "devDependencies": {
     "browservefy": "0.0.10",
