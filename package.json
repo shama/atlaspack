@@ -1,7 +1,7 @@
 {
   "name": "atlaspack",
-  "description": "Pack images into a texture atlas.",
-  "version": "0.1.0",
+  "description": "Pack rectangles (or images) into a rectangle (or canvas texture atlas).",
+  "version": "0.2.0",
   "homepage": "https://github.com/shama/atlaspack",
   "author": {
     "name": "Kyle Robinson Young",
@@ -35,6 +35,8 @@
   "keywords": [
     "voxel",
     "texture",
-    "atlas"
+    "atlas",
+    "geometry",
+    "spritemap"
   ]
 }

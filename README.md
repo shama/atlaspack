@@ -141,6 +141,7 @@ npm install atlaspack
 ```
 
 ## release history
+* 0.2.0 - Add expand and index methods.
 * 0.1.0 - initial release
 
 ## license
