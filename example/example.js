@@ -1,11 +1,18 @@
 // create a canvas
 var canvas = document.createElement('canvas');
 document.body.appendChild(canvas);
-canvas.width = 800;
-canvas.height = 533;
+canvas.width = 128;
+canvas.height = 128;
 
 // create an atlas with our canvas
 var atlas = require('../')(canvas);
+
+function atlasPack(img) {
+  var node = atlas.pack(img);
+  if (node === false) {
+    atlas = atlas.grow(img);
+  }
+}
 
 // add images to our atlas
 var texturePath = 'node_modules/painterly-textures/textures/';
@@ -19,7 +26,7 @@ var texturePath = 'node_modules/painterly-textures/textures/';
   var img = new Image();
   img.src = texturePath + name + '.png';
   img.onload = function() {
-    atlas.pack(img);
+    atlasPack(img);
   };
 });
 
@@ -40,7 +47,7 @@ canvas.ondrop = function (e) {
       var img = new Image();
       img.src = event.target.result;
       img.onload = function() {
-        atlas.pack(img);
+        atlasPack(img);
       };
     };
     reader.readAsDataURL(file);
