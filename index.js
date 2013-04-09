@@ -129,7 +129,7 @@ Atlas.prototype._ontoCanvas = function(node) {
       this.context = this.canvas.getContext('2d');
     }
     this.context.drawImage(this.img, node.rect.x, node.rect.y, node.rect.w, node.rect.h);
-    node.rect.name = this.img.id || this.img.name || this.img.src;
+    node.rect.name = this.img.id || this.img.name || this.img.src || null;
   }
   return node;
 };
