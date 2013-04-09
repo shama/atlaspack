@@ -34,6 +34,7 @@ function Atlas(x, y, w, h) {
   this.left = this.right = null;
   this.rect = new Rect(x, y, w, h);
   this.filled = false;
+  this._cache = [];
 }
 module.exports = function() {
   if (arguments.length === 1) { return new Atlas(arguments[0]); }
@@ -45,6 +46,7 @@ module.exports.Rect = Rect;
 
 // pack image/rect to the atlas
 Atlas.prototype.pack = function(rect) {
+  this._cache = [];
   rect = this._toRect(rect);
   if (this.left !== null) {
     return this._ontoCanvas(this.left.pack(rect) || this.right.pack(rect));
@@ -104,6 +106,22 @@ Atlas.prototype.grow = function(rect) {
   return (atlas.pack(rect) === false) ? atlas.grow(rect) : atlas;
 };
 
+Atlas.prototype.index = function() {
+  var self = this;
+  if (self._cache.length > 0) {
+    return self._cache;
+  }
+  (function loop(atlas) {
+    if (atlas.left !== null) {
+      loop(atlas.left);
+      loop(atlas.right);
+    } else if (atlas.rect.name) {
+      self._cache.push(atlas.rect);
+    }
+  }(self));
+  return self._cache;
+};
+
 // if has an image and canvas, draw to the canvas as we go
 Atlas.prototype._ontoCanvas = function(node) {
   if (node && this.img && this.canvas) {
@@ -111,6 +129,7 @@ Atlas.prototype._ontoCanvas = function(node) {
       this.context = this.canvas.getContext('2d');
     }
     this.context.drawImage(this.img, node.rect.x, node.rect.y, node.rect.w, node.rect.h);
+    node.rect.name = this.img.id || this.img.name || this.img.src;
   }
   return node;
 };
@@ -132,15 +151,7 @@ Atlas.prototype._toRect = function(rect) {
 Atlas.prototype._debug = function() {
   if (!this.canvas) { return; }
   var context = this.canvas.getContext('2d');
-  var rects = [];
-  (function loop(atlas) {
-    rects.push(atlas.rect);
-    if (atlas.left !== null) {
-      loop(atlas.left);
-      loop(atlas.right);
-    }
-  }(this));
-  rects.forEach(function(rect) {
+  this.index().forEach(function(rect) {
     context.lineWidth = 1;
     context.strokeStyle = 'red';
     context.strokeRect(rect.x, rect.y, rect.w, rect.h);

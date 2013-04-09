@@ -24,6 +24,7 @@ var texturePath = 'node_modules/painterly-textures/textures/';
   'netherrack', 'redwool',
 ].forEach(function(name) {
   var img = new Image();
+  img.id = name;
   img.src = texturePath + name + '.png';
   img.onload = function() {
     atlasPack(img);
