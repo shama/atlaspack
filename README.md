@@ -1,6 +1,6 @@
 # atlaspack
 
-Pack images into a texture atlas. View the
+Pack rectangles (or images) into a rectangle (or canvas texture atlas). View the
 [demo](http://shama.github.com/atlaspack/).
 
 ## example
@@ -18,6 +18,7 @@ var atlas = require('atlaspack')(canvas);
 
 for (var i = 0; i < 100; i++) {
   var img = new Image();
+  img.id = i;
   img.src = 'images/' + i + '.png';
   img.onload = function() {
     atlas.pack(img);
@@ -50,6 +51,87 @@ var atlas = require('atlaspack')(512, 512);
   setTimeout(loop, 1000);
 }());
 ```
+
+## api
+
+### `atlaspack([...])`
+Takes either 1 `canvas` argument, 2 `width, height` arguments or 4
+`x, y, width, height` arguments. Returns an instance of `Atlas`.
+
+### `atlaspack.Atlas([...])`
+Takes either 1 `canvas` argument, 2 `width, height` arguments or 4
+`x, y, width, height` arguments.
+
+#### `atlas.pack(rect || image || object)`
+Recursively tries to pack `rect` (or `image`, `object`) into the atlas. Will
+return `false` if fails to fit the `rect` otherwise will return the atlas node
+the `rect` has been packed into:
+
+```js
+var Atlas = require('atlaspack').Atlas;
+var Rect = require('atlaspack').Rect;
+
+var atlas = new Atlas(128, 128), node;
+
+node = atlas.pack(new Rect(0, 0, 32, 32));
+node = atlas.pack({x: 0, y: 0, w: 32, h: 32});
+
+var img = new Image();
+img.src = 'myimage.png';
+img.onload = function() {
+  node = atlas.pack(img);
+};
+```
+
+#### `atlas.expand(rect || img || object)`
+Will recursively expand the `atlas` to fit a new `rect` then pack the `rect`
+into the expanded `atlas`. Returns the newly expanded `atlas`:
+
+```js
+var atlas = require('atlaspack')(128, 128);
+var dontfit = {x: 0, y: 0, w: 256, h: 256};
+var node = atlas.pack(dontfit);
+if (node === false) {
+  atlas = atlas.expand(dontfit);
+}
+```
+
+#### `atlas.index()`
+Returns a flat array of `rect`s which have images within the atlas. Useful for
+retrieving an atlas key:
+
+```js
+var atlas = require('atlaspack')(128, 128);
+
+function done() {
+  atlas.index().forEach(function(rect) {
+    console.log('Name: ' + rect.name);
+    console.log('Coords: ' + rect.x + ', ' + rect.y);
+  });
+}
+
+for (var i = 0; i < 100; i++) {
+  var img = new Image();
+  img.src = 'images/' + i + '.png';
+
+  // Will use the id || name || src of the image as the rect.name
+  img.id = i;
+
+  img.onload = function() {
+    atlas.pack(img);
+    if (i === 99) done();
+  };
+}
+```
+
+### `atlaspack.Rect(x, y, w, h)`
+Creates a rectangle instance.
+
+#### `rect.fitsIn(rect)`
+Returns a `boolean` whether a `rect` fits within another `rect`.
+
+#### `rect.sameSizeAs(rect)`
+Returns a `boolean` whether a `rect` is the same size as another `rect`.
 
 ## install
 With [npm](http://npmjs.org) do:
