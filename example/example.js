@@ -10,7 +10,7 @@ var atlas = require('../')(canvas);
 function atlasPack(img) {
   var node = atlas.pack(img);
   if (node === false) {
-    atlas = atlas.grow(img);
+    atlas = atlas.expand(img);
   }
 }
 

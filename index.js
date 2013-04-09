@@ -70,7 +70,7 @@ Atlas.prototype.pack = function(rect) {
   return this._ontoCanvas(this.left.pack(rect));
 };
 
-Atlas.prototype.grow = function(rect) {
+Atlas.prototype.expand = function(rect) {
   var self = this;
   rect = this._toRect(rect);
 
@@ -103,7 +103,7 @@ Atlas.prototype.grow = function(rect) {
     atlas.context.putImageData(old, 0, 0);
   }
 
-  return (atlas.pack(rect) === false) ? atlas.grow(rect) : atlas;
+  return (atlas.pack(rect) === false) ? atlas.expand(rect) : atlas;
 };
 
 Atlas.prototype.index = function() {
