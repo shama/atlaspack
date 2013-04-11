@@ -35,6 +35,7 @@ function Atlas(x, y, w, h) {
   this.rect = new Rect(x, y, w, h);
   this.filled = false;
   this._cache = [];
+  this._uvcache = Object.create(null);
 }
 module.exports = function() {
   if (arguments.length === 1) { return new Atlas(arguments[0]); }
@@ -120,6 +121,35 @@ Atlas.prototype.index = function() {
     }
   }(self));
   return self._cache;
+};
+
+Atlas.prototype.uv = function() {
+  var self = this;
+  if (self._uvcache.length > 0) {
+    return self._uvcache;
+  }
+  (function loop(atlas) {
+    if (atlas.left !== null) {
+      loop(atlas.left);
+      loop(atlas.right);
+    } else if (atlas.rect.name) {
+      self._uvcache[atlas.rect.name] = [
+        [atlas.rect.x, atlas.rect.y],
+        [atlas.rect.x + atlas.rect.w, atlas.rect.y],
+        [atlas.rect.x + atlas.rect.w, atlas.rect.y + atlas.rect.h],
+        [atlas.rect.x, atlas.rect.y + atlas.rect.h],
+      ].map(function(uv) {
+        if (uv[0] !== 0) {
+          uv[0] = uv[0] / self.rect.w;
+        }
+        if (uv[1] !== 0) {
+          uv[1] = uv[1] / self.rect.h;
+        }
+        return uv;
+      });
+    }
+  }(self));
+  return self._uvcache;
 };
 
 // if has an image and canvas, draw to the canvas as we go

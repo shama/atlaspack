@@ -124,6 +124,18 @@ for (var i = 0; i < 100; i++) {
 }
 ```
 
+#### `atlas.uv()`
+Returns an object with rect names as keys containing an array of UV mapping
+coordinates between 0-1 with TRBL:
+
+```js
+var uvmap = atlas.uv();
+/* {
+              TOP   RIGHT  BOTTOM  LEFT
+  'name':  [ [0,0], [1,0], [1,1], [0,1] ],
+} */
+```
+
 ### `atlaspack.Rect(x, y, w, h)`
 Creates a rectangle instance.
 
@@ -141,6 +153,7 @@ npm install atlaspack
 ```
 
 ## release history
+* 0.2.1 - Add uv method for uv coordinates.
 * 0.2.0 - Add expand and index methods.
 * 0.1.0 - initial release
 
