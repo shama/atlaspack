@@ -48,6 +48,7 @@ module.exports.Rect = Rect;
 // pack image/rect to the atlas
 Atlas.prototype.pack = function(rect) {
   this._cache = [];
+  this._uvcache = [];
   rect = this._toRect(rect);
   if (this.left !== null) {
     return this._ontoCanvas(this.left.pack(rect) || this.right.pack(rect));
