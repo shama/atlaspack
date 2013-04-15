@@ -5,7 +5,8 @@ canvas.width = 128;
 canvas.height = 128;
 
 // create an atlas with our canvas
-var atlas = require('../')(canvas);
+var createAtlas = require('../');
+var atlas = createAtlas(canvas);
 
 function atlasPack(img) {
   var node = atlas.pack(img);
@@ -57,9 +58,19 @@ canvas.ondrop = function (e) {
 };
 
 // handle exporting atlas
-var saveas = document.querySelector('#export');
-saveas.onclick = function(e) {
+document.querySelector('#export').onclick = function(e) {
   e.preventDefault();
   window.open(canvas.toDataURL());
+  return false;
+};
+
+// reset atlas
+document.querySelector('#reset').onclick = function(e) {
+  e.preventDefault();
+  if (window.confirm('Are you sure?')) {
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = 128; canvas.height = 128;
+    atlas = createAtlas(canvas);
+  }
   return false;
 };
