@@ -136,6 +136,19 @@ var uvmap = atlas.uv();
 } */
 ```
 
+#### `atlas.json([input])`
+Exports or imports a JSON key for the ability to save the atlas state and
+restore it:
+
+```js
+var jsonkey = atlas.json();
+// then later
+atlas = atlas.json(jsonkey);
+
+// make sure to set your canvas if using a canvas too
+atlas.canvas = mycanvas;
+```
+
 ### `atlaspack.Rect(x, y, w, h)`
 Creates a rectangle instance.
 
@@ -153,6 +166,7 @@ npm install atlaspack
 ```
 
 ## release history
+* 0.2.2 - Ability to get and set JSON key.
 * 0.2.1 - Add uv method for uv coordinates.
 * 0.2.0 - Add expand and index methods.
 * 0.1.0 - initial release

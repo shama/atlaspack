@@ -153,6 +153,32 @@ Atlas.prototype.uv = function() {
   return self._uvcache;
 };
 
+Atlas.prototype.json = function(input) {
+  var self = this;
+  if (input) {
+    if (typeof input === 'string') input = JSON.parse(input);
+    return (function loop(obj) {
+      if (!obj || !obj.rect) return;
+      var atlas = new Atlas(obj.rect.x, obj.rect.y, obj.rect.w, obj.rect.h);
+      if (obj.left) atlas.left = loop(obj.left);
+      if (obj.right) atlas.right = loop(obj.right);
+      return atlas;
+    }(input));
+  } else {
+    return JSON.stringify(function loop(atlas) {
+      var obj = {
+        left: null, right: null,
+        rect: atlas.rect, filled: atlas.filled
+      };
+      if (atlas.left !== null) {
+        obj.left = loop(atlas.left);
+        obj.right = loop(atlas.right);
+      }
+      return obj;
+    }(self), null, 2);
+  }
+};
+
 // if has an image and canvas, draw to the canvas as we go
 Atlas.prototype._ontoCanvas = function(node) {
   if (node && this.img && this.canvas) {

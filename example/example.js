@@ -64,6 +64,13 @@ document.querySelector('#export').onclick = function(e) {
   return false;
 };
 
+// handle exporting atlas key
+document.querySelector('#json').onclick = function(e) {
+  e.preventDefault();
+  window.open('data:application/json,' + escape(atlas.json()));
+  return false;
+};
+
 // reset atlas
 document.querySelector('#reset').onclick = function(e) {
   e.preventDefault();
