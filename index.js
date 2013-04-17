@@ -133,7 +133,7 @@ Atlas.prototype.uv = function() {
     if (atlas.left !== null) {
       loop(atlas.left);
       loop(atlas.right);
-    } else if (atlas.rect.name) {
+    } else if (typeof atlas.rect.name !== 'undefined') {
       self._uvcache[atlas.rect.name] = [
         [atlas.rect.x, atlas.rect.y],
         [atlas.rect.x + atlas.rect.w, atlas.rect.y],
