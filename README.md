@@ -149,6 +149,11 @@ atlas = atlas.json(jsonkey);
 atlas.canvas = mycanvas;
 ```
 
+#### `atlas.tilepad`
+Set this boolean property to `true` if you would like each packed image to pad
+itself with a tiled pattern of itself. Useful for avoiding texture bleeding when
+mipmapping.
+
 ### `atlaspack.Rect(x, y, w, h)`
 Creates a rectangle instance.
 
@@ -166,6 +171,7 @@ npm install atlaspack
 ```
 
 ## release history
+* 0.2.3 - Add tilepad property to help with mipmapping.
 * 0.2.2 - Ability to get and set JSON key.
 * 0.2.1 - Add uv method for uv coordinates.
 * 0.2.0 - Add expand and index methods.

@@ -7,11 +7,13 @@ canvas.height = 128;
 // create an atlas with our canvas
 var createAtlas = require('../');
 var atlas = createAtlas(canvas);
+//atlas.tilepad = true;
 
 function atlasPack(img) {
   var node = atlas.pack(img);
   if (node === false) {
     atlas = atlas.expand(img);
+    //atlas.tilepad = true;
   }
 }
 
@@ -20,7 +22,8 @@ var texturePath = 'node_modules/painterly-textures/textures/';
 [
   'dirt', 'grass', 'grass_dirt',
   'obsidian', 'plank', 'whitewool',
-  'crate', 'bedrock', 'bluewool', 'cobblestone',
+  'crate',
+  'bedrock', 'bluewool', 'cobblestone',
   'brick', 'diamond', 'glowstone',
   'netherrack', 'redwool',
 ].forEach(function(name) {

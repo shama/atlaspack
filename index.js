@@ -34,6 +34,7 @@ function Atlas(x, y, w, h) {
   this.left = this.right = null;
   this.rect = new Rect(x, y, w, h);
   this.filled = false;
+  this.tilepad = false;
   this._cache = [];
   this._uvcache = Object.create(null);
 }
@@ -50,6 +51,11 @@ Atlas.prototype.pack = function(rect) {
   this._cache = [];
   this._uvcache = [];
   rect = this._toRect(rect);
+
+  if (this.img && this.tilepad) {
+    rect = this._tilepad(rect);
+  }
+
   if (this.left !== null) {
     return this._ontoCanvas(this.left.pack(rect) || this.right.pack(rect));
   }
@@ -75,6 +81,10 @@ Atlas.prototype.pack = function(rect) {
 Atlas.prototype.expand = function(rect) {
   var self = this;
   rect = this._toRect(rect);
+
+  if (this.img && this.tilepad) {
+    rect = this._tilepad(rect);
+  }
 
   var atlas;
   if (this.rect.w < this.rect.h) {
@@ -129,16 +139,18 @@ Atlas.prototype.uv = function() {
   if (self._uvcache.length > 0) {
     return self._uvcache;
   }
+  var isPad = this.tilepad;
   (function loop(atlas) {
     if (atlas.left !== null) {
       loop(atlas.left);
       loop(atlas.right);
     } else if (typeof atlas.rect.name !== 'undefined') {
+      var p = (isPad) ? atlas.rect.w / 4 : 0;
       self._uvcache[atlas.rect.name] = [
-        [atlas.rect.x, atlas.rect.y],
-        [atlas.rect.x + atlas.rect.w, atlas.rect.y],
-        [atlas.rect.x + atlas.rect.w, atlas.rect.y + atlas.rect.h],
-        [atlas.rect.x, atlas.rect.y + atlas.rect.h],
+        [atlas.rect.x + p, atlas.rect.y + p],
+        [(atlas.rect.x + p) + (atlas.rect.w - (p * 2)), atlas.rect.y + p],
+        [(atlas.rect.x + p) + (atlas.rect.w - (p * 2)), (atlas.rect.y + p) + (atlas.rect.h - (p * 2))],
+        [(atlas.rect.x + p), (atlas.rect.y + p) + (atlas.rect.h - (p * 2))],
       ].map(function(uv) {
         if (uv[0] !== 0) {
           uv[0] = uv[0] / self.rect.w;
@@ -177,6 +189,31 @@ Atlas.prototype.json = function(input) {
       return obj;
     }(self), null, 2);
   }
+};
+
+// Pads the image by tiling itself around itself
+Atlas.prototype._tilepad = function(rect) {
+  var img = this.img;
+  if (!img) return rect;
+
+  var p = img.width / 2;
+
+  var canvas = document.createElement('canvas');
+  canvas.name = img.name || img.src;
+  canvas.id = img.id || '';
+  canvas.width = img.width + img.width;
+  canvas.height = img.height + img.height;
+  var ctx = canvas.getContext('2d');
+
+  var pattern = ctx.createPattern(img, 'repeat');
+  ctx.fillStyle = pattern;
+  ctx.translate(p, p);
+  ctx.fillRect(-p, -p, canvas.width + p, canvas.height + p);
+  ctx.translate(-p, -p);
+
+  this.img = canvas;
+
+  return new Rect(rect.x, rect.y, this.img.width, this.img.height);
 };
 
 // if has an image and canvas, draw to the canvas as we go
