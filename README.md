@@ -124,7 +124,7 @@ for (var i = 0; i < 100; i++) {
 }
 ```
 
-#### `atlas.uv()`
+#### `atlas.uv([width, height])`
 Returns an object with rect names as keys containing an array of UV mapping
 coordinates between 0-1 with TRBL:
 
@@ -135,6 +135,9 @@ var uvmap = atlas.uv();
   'name':  [ [0,0], [1,0], [1,1], [0,1] ],
 } */
 ```
+
+Specify a `width` and `height` to override the dimensions the UVs will calculate
+from. Otherwise it will use the `atlas.rect` width and height.
 
 #### `atlas.json([input])`
 Exports or imports a JSON key for the ability to save the atlas state and
@@ -171,6 +174,7 @@ npm install atlaspack
 ```
 
 ## release history
+* 0.2.4 - Add width/height overrides to uv method.
 * 0.2.3 - Add tilepad property to help with mipmapping.
 * 0.2.2 - Ability to get and set JSON key.
 * 0.2.1 - Add uv method for uv coordinates.

@@ -134,11 +134,13 @@ Atlas.prototype.index = function() {
   return self._cache;
 };
 
-Atlas.prototype.uv = function() {
+Atlas.prototype.uv = function(w, h) {
   var self = this;
   if (self._uvcache.length > 0) {
     return self._uvcache;
   }
+  w = w || self.rect.w;
+  h = h || self.rect.h;
   var isPad = this.tilepad;
   (function loop(atlas) {
     if (atlas.left !== null) {
@@ -153,10 +155,10 @@ Atlas.prototype.uv = function() {
         [(atlas.rect.x + p), (atlas.rect.y + p) + (atlas.rect.h - (p * 2))],
       ].map(function(uv) {
         if (uv[0] !== 0) {
-          uv[0] = uv[0] / self.rect.w;
+          uv[0] = uv[0] / w;
         }
         if (uv[1] !== 0) {
-          uv[1] = uv[1] / self.rect.h;
+          uv[1] = uv[1] / h;
         }
         return uv;
       });
