@@ -174,6 +174,7 @@ npm install atlaspack
 ```
 
 ## release history
+* 0.2.5 - clearRect before placing image onto a canvas.
 * 0.2.4 - Add width/height overrides to uv method.
 * 0.2.3 - Add tilepad property to help with mipmapping.
 * 0.2.2 - Ability to get and set JSON key.

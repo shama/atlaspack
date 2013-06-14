@@ -224,6 +224,7 @@ Atlas.prototype._ontoCanvas = function(node) {
     if (!this.context) {
       this.context = this.canvas.getContext('2d');
     }
+    this.context.clearRect(node.rect.x, node.rect.y, node.rect.w, node.rect.h);
     this.context.drawImage(this.img, node.rect.x, node.rect.y, node.rect.w, node.rect.h);
     node.rect.name = this.img.id || this.img.name || this.img.src || null;
   }
