@@ -25,12 +25,13 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "start": "./node_modules/.bin/browservefy example/example.js 8080 -- -d",
+    "start": "./node_modules/.bin/beefy example/example.js 8080 -- -d",
     "gh-pages": "browserify example/example.js -o example/example.js"
   },
   "devDependencies": {
-    "browservefy": "0.0.10",
-    "painterly-textures": "0.0.3"
+    "painterly-textures": "0.0.3",
+    "beefy": "~1.0.0",
+    "browserify": "~3.28.0"
   },
   "keywords": [
     "voxel",
