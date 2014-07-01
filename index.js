@@ -49,7 +49,7 @@ module.exports.Rect = Rect;
 // pack image/rect to the atlas
 Atlas.prototype.pack = function(rect) {
   this._cache = [];
-  this._uvcache = [];
+  this._uvcache = Object.create(null);
   rect = this._toRect(rect);
 
   if (this.img && this.tilepad) {
@@ -136,9 +136,6 @@ Atlas.prototype.index = function() {
 
 Atlas.prototype.uv = function(w, h) {
   var self = this;
-  if (self._uvcache.length > 0) {
-    return self._uvcache;
-  }
   w = w || self.rect.w;
   h = h || self.rect.h;
   var isPad = this.tilepad;
