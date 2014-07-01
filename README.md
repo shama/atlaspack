@@ -174,6 +174,7 @@ npm install atlaspack
 ```
 
 ## release history
+* 0.2.6 - Fix _uvcache should be an object (@deathcap).
 * 0.2.5 - clearRect before placing image onto a canvas.
 * 0.2.4 - Add width/height overrides to uv method.
 * 0.2.3 - Add tilepad property to help with mipmapping.
@@ -183,5 +184,5 @@ npm install atlaspack
 * 0.1.0 - initial release
 
 ## license
-Copyright (c) 2014 Kyle Robinson Young
+Copyright (c) 2014 Kyle Robinson Young  
 Licensed under the MIT license.
