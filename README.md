@@ -183,5 +183,5 @@ npm install atlaspack
 * 0.1.0 - initial release
 
 ## license
-Copyright (c) 2013 Kyle Robinson Young<br/>
+Copyright (c) 2014 Kyle Robinson Young
 Licensed under the MIT license.
