@@ -173,6 +173,19 @@ With [npm](http://npmjs.org) do:
 npm install atlaspack
 ```
 
+## using standalone / non-browserify
+
+It is wrapped in an UMD for use outside of browserify.
+
+Add a script tag to your HTML and use globally exposed `atlaspack` variable:
+
+```html
+<script src="node_modules/atlaspack/index.js"></script>
+<script>
+var atlas = window.atlaspack(canvas);
+</script>
+```
+
 ## release history
 * 0.2.6 - Fix _uvcache should be an object (@deathcap).
 * 0.2.5 - clearRect before placing image onto a canvas.
