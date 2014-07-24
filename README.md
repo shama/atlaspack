@@ -187,6 +187,7 @@ var atlas = window.atlaspack(canvas);
 ```
 
 ## release history
+* 0.2.7 - Wrap in UMD for use outside of commonjs loaders.
 * 0.2.6 - Fix _uvcache should be an object (@deathcap).
 * 0.2.5 - clearRect before placing image onto a canvas.
 * 0.2.4 - Add width/height overrides to uv method.
