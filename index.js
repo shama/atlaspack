@@ -38,16 +38,13 @@ function Atlas(x, y, w, h) {
   this._cache = [];
   this._uvcache = Object.create(null);
 }
-
-if (this.module && this.module.exports) {
-  module.exports = function() {
-    if (arguments.length === 1) { return new Atlas(arguments[0]); }
-    if (arguments.length === 2) { return new Atlas(arguments[0], arguments[1]); }
-    return new Atlas(arguments[0], arguments[1], arguments[2], arguments[3]);
-  };
-  module.exports.Atlas = Atlas;
-  module.exports.Rect = Rect;
-}
+module.exports = function() {
+  if (arguments.length === 1) { return new Atlas(arguments[0]); }
+  if (arguments.length === 2) { return new Atlas(arguments[0], arguments[1]); }
+  return new Atlas(arguments[0], arguments[1], arguments[2], arguments[3]);
+};
+module.exports.Atlas = Atlas;
+module.exports.Rect = Rect;
 
 // pack image/rect to the atlas
 Atlas.prototype.pack = function(rect) {
