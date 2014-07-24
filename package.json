@@ -29,9 +29,9 @@
     "gh-pages": "browserify example/example.js -o example/example.js"
   },
   "devDependencies": {
-    "painterly-textures": "0.0.3",
-    "beefy": "~1.0.0",
-    "browserify": "~3.28.0"
+    "beefy": "^2.1.0",
+    "browserify": "^5.0.2",
+    "painterly-textures": "0.0.3"
   },
   "keywords": [
     "voxel",
