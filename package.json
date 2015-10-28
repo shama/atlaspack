@@ -25,6 +25,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
+    "build": "browserify index.js --standalone atlaspack > dist/atlaspack.js",
     "start": "./node_modules/.bin/beefy example/example.js 8080 -- -d",
     "gh-pages": "browserify example/example.js -o example/example.js"
   },

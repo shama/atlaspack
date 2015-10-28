@@ -175,12 +175,12 @@ npm install atlaspack
 
 ## using standalone / non-browserify
 
-It is wrapped in an UMD for use outside of browserify.
+A UMD build is provided for use outside of browserify.
 
 Add a script tag to your HTML and use globally exposed `atlaspack` variable:
 
 ```html
-<script src="node_modules/atlaspack/index.js"></script>
+<script src="node_modules/atlaspack/dist/atlaspack.js"></script>
 <script>
 var atlas = window.atlaspack(canvas);
 </script>
