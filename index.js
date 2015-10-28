@@ -232,7 +232,7 @@ Atlas.prototype._ontoCanvas = function(node) {
 // make sure we're always working with rects
 Atlas.prototype._toRect = function(rect) {
   // if rect is an image
-  if (rect.nodeName && rect.nodeName === 'IMG') {
+  if (rect.nodeName && (rect.nodeName === 'IMG' || rect.nodeName === 'CANVAS')) {
     this.img = rect;
     rect = new Rect(rect.x, rect.y, rect.width, rect.height);
   }
