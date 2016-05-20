@@ -198,5 +198,5 @@ var atlas = window.atlaspack(canvas);
 * 0.1.0 - initial release
 
 ## license
-Copyright (c) 2014 Kyle Robinson Young  
+Copyright (c) 2016 Kyle Robinson Young  
 Licensed under the MIT license.
