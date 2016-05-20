@@ -25,12 +25,11 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "start": "./node_modules/.bin/beefy example/example.js 8080 -- -d",
-    "gh-pages": "browserify example/example.js -o example/example.js"
+    "start": "budo example/example.js:bundle.js",
+    "gh-pages": "browserify example/example.js -o bundle.js"
   },
   "devDependencies": {
-    "beefy": "^2.1.0",
-    "browserify": "^5.0.2",
+    "budo": "^8.2.2",
     "painterly-textures": "0.0.3"
   },
   "keywords": [
