@@ -1,3 +1,5 @@
+> **Notice:** The owner of the npm package name `atlaspack` has been reassigned. See: https://github.com/shama/atlaspack/issues/18
+
 # atlaspack
 
 Pack rectangles (or images) into a rectangle (or canvas texture atlas). View the
